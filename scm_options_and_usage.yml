@@ -1,0 +1,50 @@
+---
+# To generate this scripts options parsing and helper with bash-argparse-generator repository
+generator_opts:
+  usage: "[options] [repository...]"
+  use_getopt: false
+  true_false_choice:
+    - "true"
+    - ""
+  output_file: "_options_and_usage.sh"
+  remains_as_args: true
+  add_debug: true
+  add_test: false
+
+bash_opts:
+  - options: f,force
+    destination: force_removal
+    has_argument: no
+    help_text: Force without prompting
+  - options: v,verbose
+    destination: verbose
+    has_argument: no
+    help_text: Verbose mode
+  - options: version
+    destination: print_version
+    has_argument: no
+    help_text: Show version and exit
+  - options: create,delete,list,set-default-branch
+    destination: action
+    has_argument: self
+    help_text: Action to perform
+  - options: github,gitlab,bitbucket
+    destination: scm_type
+    has_argument: self
+    help_text: Targeted SCM for rest API
+  - options: private,public,internal
+    destination: visibility
+    has_argument: self
+    help_text: Visibility of the repository
+  - options: org
+    destination: scm_organization
+    has_argument: yes
+    help_text: Organization, group or teams associated to process
+  - options: base-repo
+    destination: create_base_repository
+    has_argument: no
+    help_text: Create base repository
+  - options: user,organization
+    destination: scm_entity
+    has_argument: self
+    help_text: Whether to act as user or organization level
