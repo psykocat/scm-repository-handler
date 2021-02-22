@@ -40,7 +40,7 @@ function fatal(){
 }
 
 function read_from_env_or_file(){
-	local override_env_file="${SCM_ENV_FILE:-./.env}"
+	local override_env_file="${SCM_HANDLER_ENV_FILE:-./.env}"
 	local variable="${1}"
 	local default_value="${2:-}"
 	local retstr=
