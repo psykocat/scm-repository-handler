@@ -121,6 +121,21 @@ function check_scm_entity(){
 	esac
 }
 
+# Retrieve appropriate ID according to given entity
+function call_appropriate_id(){
+	case "${scm_entity,,}" in
+		user)
+			_get_user_id
+			;;
+		organization)
+			_get_organization_id
+			;;
+		*)
+			fatal "unknown entity provided (${scm_entity})"
+			;;
+	esac
+}
+
 function repository_base_contents(){
 	local do_push_branches="${1:-true}"
 	local message_name="Automated generation"

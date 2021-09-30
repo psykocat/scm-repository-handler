@@ -7,6 +7,13 @@ function _get_user_id(){
 	cat_last_request|jq -r '.id'
 }
 
+function _get_organization_id(){
+	local curl_request="/groups/${scm_organization}"
+	_curlw -X GET
+	validate_http_code "200" "Error while fetching user id"
+	cat_last_request|jq -r '.id'
+}
+
 function _get_project_id(){
 	local _project="${1}"
 	local curl_request="/projects?membership=true&search=${_project}"
@@ -22,14 +29,15 @@ gitlab_clone_baseurl="$(read_from_env_or_file GITLAB_CLONE_BASEURL)"
 function gitlab_create_repo(){
 	# TODO: Validate it works for groups
 	local curl_request="$(check_scm_entity /projects /projects)"
-	local __userid=$(_get_user_id)
+	local id_field="$(check_scm_entity user_id namespace_id)"
+	local __userid=$(call_appropriate_id)
 	if [ "${__userid}" = "null" ] || [ -z "${__userid}" ]; then
 		fatal "Wrong user id, aborting. (${__userid} found)"
 	fi
 	cat > data.json <<-EOF
 	{
 		"name": "${_reponame}",
-		"user_id": ${__userid},
+		"${id_field}": ${__userid},
 		"visibility": "${visibility}"
 	}
 	EOF
