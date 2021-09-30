@@ -18,6 +18,7 @@ verbose=
 declare -a files_to_remove=()
 declare do_not_remove_files=
 readonly script_dir="$(dirname $(readlink -f "${BASH_SOURCE[0]}" ))"
+readonly subscripts_dir="${script_dir}/subscripts"
 ###
 
 # Cleanup process if needed, by default does nothing
@@ -35,11 +36,11 @@ trap cleanup EXIT
 ###
 
 ### Common functions
-. "${script_dir}/_common.sh"
+. "${subscripts_dir}/_common.sh"
 ###
 
 ### Common functions
-. "${script_dir}/_options_and_usage.sh"
+. "${subscripts_dir}/_options_and_usage.sh"
 ###
 
 if echo $-|grep -qe 'x'; then
@@ -73,7 +74,7 @@ if [ "${scm_entity}" = "organization" ]; then
 fi
 
 # load associated methods
-. "${script_dir}/_${scm_type}_functions.sh"
+. "${subscripts_dir}/_${scm_type}_functions.sh"
 
 is_mandatory_arg "${scm_type}_api_baseurl"
 is_mandatory_arg "${scm_type}_clone_baseurl"
