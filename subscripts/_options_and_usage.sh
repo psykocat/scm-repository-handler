@@ -45,7 +45,7 @@ while [ $# -ne 0 ]; do
 		--create|--delete|--list|--set-default-branch) action="${1#--}";;
 		--github|--gitlab|--bitbucket) scm_type="${1#--}";;
 		--private|--public|--internal) visibility="${1#--}";;
-		--org) scm_organization="true";;
+		--org) shift; scm_organization="${1}";;
 		--base-repo) create_base_repository="true";;
 		--user|--organization) scm_entity="${1#--}";;
 		*) args+=("${1}");;

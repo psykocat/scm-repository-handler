@@ -43,10 +43,15 @@ function read_from_env_or_file(){
 	local override_env_file="${SCM_HANDLER_ENV_FILE:-./.env}"
 	local variable="${1}"
 	local default_value="${2:-}"
+	local use_default_first="${3:-no}"
 	local retstr=
+	if [ "${use_default_first}" = "yes" ] && [ -n "${default_value:-}" ]; then
+		echo "${default_value}"
+		return
+	fi
 
 	if [ -n "${!variable:-}" ]; then
-		echo "${!variable:-}"
+		echo "${!variable}"
 	else
 		retstr=$(. "${override_env_file}" && echo ${!variable:-})
 		if [ -n "${retstr}" ]; then

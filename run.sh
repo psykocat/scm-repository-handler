@@ -55,8 +55,8 @@ fi
 # Format action to match method name
 action=${action//-/_};
 
-scm_type=$(read_from_env_or_file PROJECT_SCM_TYPE "${scm_type}")
-scm_organization=$(read_from_env_or_file PROJECT_SCM_ORGANIZATION "${scm_organization}")
+scm_type=$(read_from_env_or_file PROJECT_SCM_TYPE "${scm_type}" yes)
+scm_organization=$(read_from_env_or_file PROJECT_SCM_ORGANIZATION "${scm_organization}" yes)
 scm_username=$(read_from_env_or_file PROJECT_SCM_USER)
 scm_default_branch=$(read_from_env_or_file SCM_DEFAULT_BRANCH "master")
 scm_create_develop_branch=$(read_from_env_or_file SCM_CREATE_DEVELOP_BRANCH "true")
