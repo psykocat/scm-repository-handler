@@ -6,7 +6,7 @@ generator_opts:
   true_false_choice:
     - "true"
     - ""
-  output_file: "_options_and_usage.sh"
+  output_file: "subscripts/_options_and_usage.sh"
   remains_as_args: true
   add_debug: true
   add_test: false
@@ -24,7 +24,7 @@ bash_opts:
     destination: print_version
     has_argument: no
     help_text: Show version and exit
-  - options: create,delete,list,set-default-branch
+  - elements: create,delete,list,set-default-branch
     destination: action
     has_argument: self
     help_text: Action to perform
@@ -36,7 +36,7 @@ bash_opts:
     destination: visibility
     has_argument: self
     help_text: Visibility of the repository
-  - options: org
+  - options: O,org
     destination: scm_organization
     has_argument: yes
     help_text: Organization, group or teams associated to process
